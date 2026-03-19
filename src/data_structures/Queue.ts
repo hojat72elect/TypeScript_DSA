@@ -1,49 +1,52 @@
+/**
+ * This is a simple one-way queue and a FIFO structure.
+ */
 export class Queue {
 
-    private dataHolder: any[];
+    private _dataHolder: any[];
 
     constructor() {
-        this.dataHolder = [];
+        this._dataHolder = [];
     }
 
     isEmpty() {
-        return this.dataHolder.length === 0;
+        return this._dataHolder.length === 0;
     }
 
     getSize() {
-        return this.dataHolder.length;
+        return this._dataHolder.length;
     }
 
     enqueue(newValue: any) {
-        this.dataHolder.push(newValue);
+        this._dataHolder.push(newValue);
     }
 
     dequeue() {
         if (this.isEmpty()) return undefined;
-        return this.dataHolder.shift();
+        return this._dataHolder.shift();
     }
 
     /**
-     * @return The element in the row with the highest priority. Or null, if the queue is empty.
+     * @return The element in the row with the highest priority. Or undefined, if the queue is empty.
      */
     peekFront() {
         if (this.isEmpty()) return undefined;
-        return this.dataHolder[0];
+        return this._dataHolder[0];
     }
 
     peekBack() {
         if (this.isEmpty()) return undefined;
-        return this.dataHolder[this.dataHolder.length - 1];
+        return this._dataHolder[this._dataHolder.length - 1];
     }
 
     /**
      * @returns A string representation of the Queue (for debugging purposes).
      */
     toString(): string {
-        return this.dataHolder.join("--");
+        return this._dataHolder.join("-->");
     }
 
     clear() {
-        this.dataHolder = [];
+        this._dataHolder = [];
     }
 }
