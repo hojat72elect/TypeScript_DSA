@@ -1,6 +1,9 @@
-class ListNode<T> {
+/**
+ * The special kind of node that we're going to only use for a SinglyLinkedList.
+ */
+class Node<T> {
     value: T;
-    next: ListNode<T> | null;
+    next: Node<T> | null;
 
     constructor(value: T) {
         this.value = value;
@@ -9,14 +12,18 @@ class ListNode<T> {
 }
 
 export class SinglyLinkedList<T> {
-    private headNode: ListNode<T> | null;
-    private tailNode: ListNode<T> | null;
+    private headNode: Node<T> | null;
+    private tailNode: Node<T> | null;
     private size: number;
 
-    constructor() {
+    constructor(data: T[] = []) {
         this.headNode = null;
         this.tailNode = null;
         this.size = 0;
+
+        for (const item of data) {
+            this.append(item);
+        }
     }
 
     isEmpty() {
@@ -27,7 +34,7 @@ export class SinglyLinkedList<T> {
      * Add a new node to the beginning of the list.
      */
     prepend(value: T) {
-        const newNode = new ListNode(value);
+        const newNode = new Node(value);
         if (this.isEmpty()) {
             this.headNode = newNode;
             this.tailNode = newNode;
@@ -43,7 +50,7 @@ export class SinglyLinkedList<T> {
      * Add a new node to the end of the list.
      */
     append(value: T) {
-        const newNode = new ListNode(value);
+        const newNode = new Node(value);
         if (this.isEmpty()) {
             this.headNode = newNode;
             this.tailNode = newNode;
@@ -72,9 +79,9 @@ export class SinglyLinkedList<T> {
             return;
         }
 
-        const newNode = new ListNode(value);
+        const newNode = new Node(value);
         let currentNode = this.headNode;
-        let previousNode: ListNode<T> | null = null;
+        let previousNode: Node<T> | null = null;
         let currentIndex = 0;
 
         while (currentIndex !== index) {
@@ -82,7 +89,7 @@ export class SinglyLinkedList<T> {
             currentNode = currentNode!.next;
             currentIndex++;
         }
-
+        // Right now, we're in the exact index we are supposed to insert the new node
         previousNode!.next = newNode;
         newNode.next = currentNode;
         this.size++;
@@ -96,7 +103,7 @@ export class SinglyLinkedList<T> {
 
         const removedValue = this.headNode!.value;
 
-        if (this.headNode === this.tailNode) {
+        if (this.size === 1) {
             this.headNode = null;
             this.tailNode = null;
         } else {
@@ -115,7 +122,7 @@ export class SinglyLinkedList<T> {
 
         const removedValue = this.tailNode!.value;
 
-        if (this.headNode === this.tailNode) {
+        if (this.size === 1) {
             this.headNode = null;
             this.tailNode = null;
         } else {
@@ -123,6 +130,7 @@ export class SinglyLinkedList<T> {
             while (current!.next !== this.tailNode) {
                 current = current!.next;
             }
+            // Right now, the "current" contains the node before the tail node
             current!.next = null;
             this.tailNode = current;
         }
@@ -145,7 +153,7 @@ export class SinglyLinkedList<T> {
         }
 
         let current = this.headNode;
-        let previous: ListNode<T> | null = null;
+        let previous: Node<T> | null = null;
         let currentIndex = 0;
 
         while (currentIndex < index) {
@@ -173,7 +181,7 @@ export class SinglyLinkedList<T> {
         }
 
         let current = this.headNode;
-        let previous: ListNode<T> | null = null;
+        let previous: Node<T> | null = null;
 
         while (current !== null) {
             if (current.value === value) {
@@ -308,9 +316,9 @@ export class SinglyLinkedList<T> {
             return;
         }
 
-        let previous: ListNode<T> | null = null;
+        let previous: Node<T> | null = null;
         let current = this.headNode;
-        let next: ListNode<T> | null = null;
+        let next: Node<T> | null = null;
 
         this.tailNode = this.headNode;
 
