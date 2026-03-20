@@ -3,7 +3,7 @@
  * Only use this node for trees, nothing else.
  * this class is private and only usable in this file.
  */
-class _Node<T> {
+export class _Node<T> {
     value: T;
     children: _Node<T>[];
 
@@ -26,7 +26,7 @@ class _Node<T> {
 /**
  * The basic tree which can be considered as the parent of all other kinds of trees.
  */
-class GeneralTree<T> {
+export class GeneralTree<T> {
     public root: _Node<T> | null;
 
     constructor(rootValue?: T) {
