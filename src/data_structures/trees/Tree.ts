@@ -3,9 +3,9 @@
  * Only use this node for trees, nothing else.
  * this class is private and only usable in this file.
  */
-class Node<T> {
+class GeneralNode<T> {
     value: T;
-    children: Node<T>[];
+    children: GeneralNode<T>[];
 
     constructor(value: T) {
         this.value = value;
@@ -17,16 +17,16 @@ class Node<T> {
  * The basic tree which can be considered as the parent of all other kinds of trees.
  */
 export class GeneralTree<T> {
-    public root: Node<T> | null;
+    public root: GeneralNode<T> | null;
 
     constructor(rootValue?: T) {
-        this.root = rootValue ? new Node(rootValue) : null;
+        this.root = rootValue ? new GeneralNode(rootValue) : null;
     }
 
     /**
      * If you give it a tree node, it will traverse through all of its children recursively.
      */
-    public traverse(node: Node<T> | null = this.root, depth: number = 0) {
+    public traverse(node: GeneralNode<T> | null = this.root, depth: number = 0) {
         if (!node) return "";
 
         let resultingString = "  ".repeat(depth) + "└──" + node.value + "\n";
@@ -41,8 +41,8 @@ export class GeneralTree<T> {
      * Adds a child node to the specified parent.
      * Then returns the parent node.
      */
-    static insert<E>(parentNode: Node<E>, newValue: E): Node<E> {
-        const newNode = new Node(newValue);
+    static insert<E>(parentNode: GeneralNode<E>, newValue: E): GeneralNode<E> {
+        const newNode = new GeneralNode(newValue);
         parentNode.children.push(newNode);
         return parentNode;
     }

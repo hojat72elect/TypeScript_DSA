@@ -1,5 +1,5 @@
 import {expect, test} from "bun:test";
-import {GeneralTree} from "../../src/data_structures/Tree.ts"
+import {GeneralTree} from "../../src/data_structures/trees/Tree.ts"
 
 test("behavior of basic tree", () => {
     const sut1 = new GeneralTree<string>("Mahmoud");
