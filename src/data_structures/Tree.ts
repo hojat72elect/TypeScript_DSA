@@ -3,23 +3,13 @@
  * Only use this node for trees, nothing else.
  * this class is private and only usable in this file.
  */
-export class _Node<T> {
+class Node<T> {
     value: T;
-    children: _Node<T>[];
+    children: Node<T>[];
 
     constructor(value: T) {
         this.value = value;
         this.children = [];
-    }
-
-    /**
-     * Adds a child node to the specified parent.
-     * Then returns the parent node.
-     */
-    static insert(parentNode: _Node<any>, newValue: any): _Node<any> {
-        const newNode = new _Node(newValue);
-        parentNode.children.push(newNode);
-        return parentNode;
     }
 }
 
@@ -27,16 +17,16 @@ export class _Node<T> {
  * The basic tree which can be considered as the parent of all other kinds of trees.
  */
 export class GeneralTree<T> {
-    public root: _Node<T> | null;
+    public root: Node<T> | null;
 
     constructor(rootValue?: T) {
-        this.root = rootValue ? new _Node(rootValue) : null;
+        this.root = rootValue ? new Node(rootValue) : null;
     }
 
     /**
      * If you give it a tree node, it will traverse through all of its children recursively.
      */
-    public traverse(node: _Node<T> | null = this.root, depth: number = 0) {
+    public traverse(node: Node<T> | null = this.root, depth: number = 0) {
         if (!node) return "";
 
         let resultingString = "  ".repeat(depth) + "└──" + node.value + "\n";
@@ -45,5 +35,15 @@ export class GeneralTree<T> {
         }
 
         return resultingString;
+    }
+
+    /**
+     * Adds a child node to the specified parent.
+     * Then returns the parent node.
+     */
+    static insert<E>(parentNode: Node<E>, newValue: E): Node<E> {
+        const newNode = new Node(newValue);
+        parentNode.children.push(newNode);
+        return parentNode;
     }
 }
