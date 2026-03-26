@@ -57,57 +57,49 @@ test("Tokenizing a simple string", () => {
     expect(token.column).toBe(1);
 });
 
-// test("should tokenize string with escaped characters", () => {
-//     const lexer = new Lexer('"hello\\nworld"');
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.String);
-//     expect(token.value).toBe("hellonworld");
-//     expect(token.line).toBe(1);
-//     expect(token.column).toBe(1);
-// });
+test("Tokenize a string with escaped characters", () => {
+    const sut = new Lexer('"hello\\nworld"');
+    const token = sut.nextToken();
 
-// test("should tokenize string with spaces", () => {
-//     const lexer = new Lexer('"hello world"');
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.String);
-//     expect(token.value).toBe("hello world");
-// });
+    expect(token.type).toBe(TokenType.String);
+    expect(token.value).toBe("hellonworld");
+    expect(token.line).toBe(1);
+    expect(token.column).toBe(1);
+});
 
-// test("should tokenize simple identifier", () => {
-//     const lexer = new Lexer("variable");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Identifier);
-//     expect(token.value).toBe("variable");
-//     expect(token.line).toBe(1);
-//     expect(token.column).toBe(1);
-// });
+test("Tokenizing a simple identifier (like a variable name)", () => {
+    const sut = new Lexer("variable");
+    const token = sut.nextToken();
 
-// test("should tokenize identifier with underscore", () => {
-//     const lexer = new Lexer("_myVar");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Identifier);
-//     expect(token.value).toBe("_myVar");
-// });
+    expect(token.type).toBe(TokenType.Identifier);
+    expect(token.value).toBe("variable");
+    expect(token.line).toBe(1);
+    expect(token.column).toBe(1);
+});
 
-// test("should tokenize identifier with numbers", () => {
-//     const lexer = new Lexer("var123");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Identifier);
-//     expect(token.value).toBe("var123");
-// });
+test("Tokenizing an identifier with underscore", () => {
+    const sut = new Lexer("_myVar");
+    const token = sut.nextToken();
 
-// test("should tokenize let keyword", () => {
-//     const lexer = new Lexer("let");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Let);
-//     expect(token.value).toBe("let");
-// });
+    expect(token.type).toBe(TokenType.Identifier);
+    expect(token.value).toBe("_myVar");
+});
+
+test("Tokenizing an identifier name with numbers", () => {
+    const sut = new Lexer("var123");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.Identifier);
+    expect(token.value).toBe("var123");
+});
+
+test("Tokenizing let keyword", () => {
+    const lexer = new Lexer("let");
+    const token = lexer.nextToken();
+
+    expect(token.type).toBe(TokenType.Let);
+    expect(token.value).toBe("let");
+});
 
 // test("should tokenize const keyword", () => {
 //     const lexer = new Lexer("const");
