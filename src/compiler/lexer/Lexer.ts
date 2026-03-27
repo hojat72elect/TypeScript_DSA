@@ -3,13 +3,25 @@ import type {Token} from "./Token.ts";
 
 export class Lexer {
 
-    private readonly sourceCode: string;
+    private sourceCode: string;
     private currentPosition = 0;
     private currentLine = 1;
     private currentColumn = 1;
 
-    constructor(sourceCode: string) {
+    constructor(sourceCode: string = "") {
         this.sourceCode = sourceCode;
+    }
+
+    /**
+     * Change the source code used by the lexer.
+     */
+    setSourceCode(newSourceCode: string) {
+        this.sourceCode = newSourceCode;
+
+        // When the source code changes, the pointer should be reset to the start of the source code.
+        this.currentPosition = 0;
+        this.currentLine = 1;
+        this.currentColumn = 1;
     }
 
     private isWhitespace(character: string): boolean {

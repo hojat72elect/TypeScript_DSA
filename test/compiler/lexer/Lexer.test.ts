@@ -2,8 +2,10 @@ import {expect, test} from "bun:test";
 import {Lexer} from "../../../src/compiler/lexer/Lexer.ts";
 import {TokenType} from "../../../src/compiler/lexer/TokenType.ts";
 
+const sut = new Lexer();
+
 test("Tokenizing a single digit number", () => {
-    const sut = new Lexer("5");
+    sut.setSourceCode("5");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Number);
@@ -13,7 +15,7 @@ test("Tokenizing a single digit number", () => {
 });
 
 test("Tokenizing multi-digit numbers", () => {
-    const sut = new Lexer("3262026");
+    sut.setSourceCode("3262026");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Number);
@@ -23,7 +25,7 @@ test("Tokenizing multi-digit numbers", () => {
 });
 
 test("Tokenizing multiple numbers", () => {
-    const sut = new Lexer("42 123");
+    sut.setSourceCode("42 123");
     const token1 = sut.nextToken();
     const token2 = sut.nextToken();
 
@@ -37,7 +39,7 @@ test("Tokenizing multiple numbers", () => {
 });
 
 test("Tokenizing a string (which happens to be empty)", () => {
-    const sut = new Lexer('""');
+    sut.setSourceCode('""');
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.String);
@@ -47,7 +49,7 @@ test("Tokenizing a string (which happens to be empty)", () => {
 });
 
 test("Tokenizing a simple string", () => {
-    const sut = new Lexer('"hello"');
+    sut.setSourceCode('"hello"');
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.String);
@@ -57,7 +59,7 @@ test("Tokenizing a simple string", () => {
 });
 
 test("Tokenize a string with escaped characters", () => {
-    const sut = new Lexer('"hello\\nworld"');
+    sut.setSourceCode('"hello\\nworld"');
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.String);
@@ -67,7 +69,7 @@ test("Tokenize a string with escaped characters", () => {
 });
 
 test("Tokenizing a simple identifier (like a variable name)", () => {
-    const sut = new Lexer("variable");
+    sut.setSourceCode("variable");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Identifier);
@@ -77,7 +79,7 @@ test("Tokenizing a simple identifier (like a variable name)", () => {
 });
 
 test("Tokenizing an identifier with underscore", () => {
-    const sut = new Lexer("_myVar");
+    sut.setSourceCode("_myVar");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Identifier);
@@ -85,7 +87,7 @@ test("Tokenizing an identifier with underscore", () => {
 });
 
 test("Tokenizing an identifier name with numbers", () => {
-    const sut = new Lexer("var123");
+    sut.setSourceCode("var123");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Identifier);
@@ -93,7 +95,7 @@ test("Tokenizing an identifier name with numbers", () => {
 });
 
 test("Tokenizing let keyword", () => {
-    const sut = new Lexer("let");
+    sut.setSourceCode("let");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Let);
@@ -101,7 +103,7 @@ test("Tokenizing let keyword", () => {
 });
 
 test("Tokenizing const keyword", () => {
-    const sut = new Lexer("const");
+    sut.setSourceCode("const");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Const);
@@ -109,7 +111,7 @@ test("Tokenizing const keyword", () => {
 });
 
 test("Tokenizing function keyword", () => {
-    const sut = new Lexer("function");
+    sut.setSourceCode("function");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Function);
@@ -117,7 +119,7 @@ test("Tokenizing function keyword", () => {
 });
 
 test("Tokenizing return keyword", () => {
-    const sut = new Lexer("return");
+    sut.setSourceCode("return");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Return);
@@ -125,7 +127,7 @@ test("Tokenizing return keyword", () => {
 });
 
 test("Tokenizing if keyword", () => {
-    const sut = new Lexer("if");
+    sut.setSourceCode("if");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.If);
@@ -133,7 +135,7 @@ test("Tokenizing if keyword", () => {
 });
 
 test("Tokenizing else keyword", () => {
-    const sut = new Lexer("else");
+    sut.setSourceCode("else");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Else);
@@ -141,7 +143,7 @@ test("Tokenizing else keyword", () => {
 });
 
 test("Tokenizing for keyword", () => {
-    const sut = new Lexer("for");
+    sut.setSourceCode("for");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.For);
@@ -149,7 +151,7 @@ test("Tokenizing for keyword", () => {
 });
 
 test("Tokenizing while keyword", () => {
-    const sut = new Lexer("while");
+    sut.setSourceCode("while");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.While);
@@ -157,7 +159,7 @@ test("Tokenizing while keyword", () => {
 });
 
 test("Tokenizing the plus operator", () => {
-    const sut = new Lexer("+");
+    sut.setSourceCode("+");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Plus);
@@ -165,7 +167,7 @@ test("Tokenizing the plus operator", () => {
 });
 
 test("Tokenizing the minus operator", () => {
-    const sut = new Lexer("-");
+    sut.setSourceCode("-");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Minus);
@@ -173,7 +175,7 @@ test("Tokenizing the minus operator", () => {
 });
 
 test("Tokenizing the multiplication operator", () => {
-    const sut = new Lexer("*");
+    sut.setSourceCode("*");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Multiply);
@@ -181,7 +183,7 @@ test("Tokenizing the multiplication operator", () => {
 });
 
 test("Tokenizing the division operator", () => {
-    const sut = new Lexer("/");
+    sut.setSourceCode("/");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Divide);
@@ -189,7 +191,7 @@ test("Tokenizing the division operator", () => {
 });
 
 test("Tokenizing the assignment operator", () => {
-    const sut = new Lexer("=");
+    sut.setSourceCode("=");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Assign);
@@ -197,7 +199,7 @@ test("Tokenizing the assignment operator", () => {
 });
 
 test("Tokenizing the equality operator", () => {
-    const sut = new Lexer("==");
+    sut.setSourceCode("==");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Equals);
@@ -205,7 +207,7 @@ test("Tokenizing the equality operator", () => {
 });
 
 test("Tokenizing the not-equals operator", () => {
-    const sut = new Lexer("!=");
+    sut.setSourceCode("!=");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.NotEquals);
@@ -213,7 +215,7 @@ test("Tokenizing the not-equals operator", () => {
 });
 
 test("Tokenizing the less-than operator", () => {
-    const sut = new Lexer("<");
+    sut.setSourceCode("<");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.LessThan);
@@ -221,7 +223,7 @@ test("Tokenizing the less-than operator", () => {
 });
 
 test("Tokenize the greater-than operator", () => {
-    const sut = new Lexer(">");
+    sut.setSourceCode(">");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.GreaterThan);
@@ -229,7 +231,7 @@ test("Tokenize the greater-than operator", () => {
 });
 
 test("Tokenize the less-than-or-equals operator", () => {
-    const sut = new Lexer("<=");
+    sut.setSourceCode("<=");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.LessThanOrEquals);
@@ -237,7 +239,7 @@ test("Tokenize the less-than-or-equals operator", () => {
 });
 
 test("Tokenize the greater-than-or-equals operator", () => {
-    const sut = new Lexer(">=");
+    sut.setSourceCode(">=");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.GreaterThanOrEqual);
@@ -245,7 +247,7 @@ test("Tokenize the greater-than-or-equals operator", () => {
 });
 
 test("Tokenize the opening parenthesis", () => {
-    const sut = new Lexer("(");
+    sut.setSourceCode("(");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.OpenParenthesis);
@@ -253,7 +255,7 @@ test("Tokenize the opening parenthesis", () => {
 });
 
 test("Tokenize the closing parenthesis", () => {
-    const sut = new Lexer(")");
+    sut.setSourceCode(")");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.CloseParenthesis);
@@ -261,7 +263,7 @@ test("Tokenize the closing parenthesis", () => {
 });
 
 test("Tokenize the opening curly brace", () => {
-    const sut = new Lexer("{");
+    sut.setSourceCode("{");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.OpenCurlyBrace);
@@ -269,7 +271,7 @@ test("Tokenize the opening curly brace", () => {
 });
 
 test("Tokenize the closing curly brace", () => {
-    const sut = new Lexer("}");
+    sut.setSourceCode("}");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.CloseCurlyBrace);
@@ -277,7 +279,7 @@ test("Tokenize the closing curly brace", () => {
 });
 
 test("Tokenize the semicolon", () => {
-    const sut = new Lexer(";");
+    sut.setSourceCode(";");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Semicolon);
@@ -285,7 +287,7 @@ test("Tokenize the semicolon", () => {
 });
 
 test("Tokenize the comma", () => {
-    const sut = new Lexer(",");
+    sut.setSourceCode(",");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Comma);
@@ -293,7 +295,7 @@ test("Tokenize the comma", () => {
 });
 
 test("The lexer skips the spaces of the source code", () => {
-    const sut = new Lexer("   42");
+    sut.setSourceCode("   42");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Number);
@@ -302,7 +304,7 @@ test("The lexer skips the spaces of the source code", () => {
 });
 
 test("The lexer skips tabs of the source code", () => {
-    const sut = new Lexer("\t42");
+    sut.setSourceCode("\t42");
     const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Number);
@@ -311,7 +313,7 @@ test("The lexer skips tabs of the source code", () => {
 });
 
 test("The lexer should handle newlines correctly", () => {
-    const sut = new Lexer("42\n123");
+    sut.setSourceCode("42\n123");
     const token1 = sut.nextToken();
     const token2 = sut.nextToken();
 
@@ -327,7 +329,7 @@ test("The lexer should handle newlines correctly", () => {
 });
 
 test("The lexer should handle multiple newlines", () => {
-    const sut = new Lexer("42\n\n123");
+    sut.setSourceCode("42\n\n123");
     const token1 = sut.nextToken();
     const token2 = sut.nextToken();
 
@@ -336,7 +338,7 @@ test("The lexer should handle multiple newlines", () => {
 });
 
 test("should return EOF at end of source code", () => {
-    const sut = new Lexer("42");
+    sut.setSourceCode("42");
     sut.nextToken(); // Consume the number
     const eofToken = sut.nextToken();
 
@@ -345,7 +347,7 @@ test("should return EOF at end of source code", () => {
 });
 
 test("should return EOF token for empty input", () => {
-    const sut = new Lexer("");
+    sut.setSourceCode("");
     const eofToken = sut.nextToken();
 
     expect(eofToken.type).toBe(TokenType.EOF);
@@ -355,7 +357,7 @@ test("should return EOF token for empty input", () => {
 });
 
 test("should tokenize variable declaration", () => {
-    const sut = new Lexer("let x = 42;");
+    sut.setSourceCode("let x = 42;");
     const tokens = sut.tokenize();
 
     expect(tokens).toHaveLength(5);
@@ -374,7 +376,7 @@ test("should tokenize variable declaration", () => {
 });
 
 test("should tokenize function declaration", () => {
-    const sut = new Lexer("function add(a, b) { return a + b; }");
+    sut.setSourceCode("function add(a, b) { return a + b; }");
     const tokens = sut.tokenize();
 
     expect(tokens).toHaveLength(14);
@@ -414,7 +416,7 @@ test("should tokenize function declaration", () => {
 });
 
 test("should tokenize if statement", () => {
-    const sut = new Lexer("if (x == 5) { return true; }");
+    sut.setSourceCode("if (x == 5) { return true; }");
     const tokens = sut.tokenize();
 
     expect(tokens).toHaveLength(11);
@@ -445,19 +447,19 @@ test("should tokenize if statement", () => {
 });
 
 test("should throw error for unexpected character", () => {
-    const sut = new Lexer("@");
+    sut.setSourceCode("@");
 
     expect(() => sut.nextToken()).toThrow("Unexpected character: @ at line 1, column 1");
 });
 
 test("should throw error for standalone exclamation mark", () => {
-    const sut = new Lexer("!");
+    sut.setSourceCode("!");
 
     expect(() => sut.nextToken()).toThrow("unexpected character: ! at line 1, column 1");
 });
 
 test("should throw error for unexpected character in expression", () => {
-    const sut = new Lexer("let x @ 5;");
+    sut.setSourceCode("let x @ 5;");
 
     // Will work for the first few tokens
     expect(sut.nextToken().type).toBe(TokenType.Let);
@@ -468,7 +470,7 @@ test("should throw error for unexpected character in expression", () => {
 });
 
 test("should tokenize entire input and return all tokens except EOF", () => {
-    const sut = new Lexer("let x = 42;");
+    sut.setSourceCode("let x = 42;");
     const tokens = sut.tokenize();
 
     expect(tokens).toHaveLength(5);
@@ -476,15 +478,15 @@ test("should tokenize entire input and return all tokens except EOF", () => {
 });
 
 test("should return empty array for empty input", () => {
-    const sut = new Lexer("");
+    sut.setSourceCode("");
     const tokens = sut.tokenize();
 
     expect(tokens).toHaveLength(0);
 });
 
 test("should handle multiple lines correctly", () => {
-    const source = "let x = 5;\nconst y = 10;";
-    const sut = new Lexer(source);
+
+    sut.setSourceCode("let x = 5;\nconst y = 10;");
     const tokens = sut.tokenize();
 
     expect(tokens).toHaveLength(10);
