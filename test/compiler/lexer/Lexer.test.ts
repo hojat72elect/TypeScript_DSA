@@ -94,156 +94,156 @@ test("Tokenizing an identifier name with numbers", () => {
 });
 
 test("Tokenizing let keyword", () => {
-    const lexer = new Lexer("let");
-    const token = lexer.nextToken();
+    const sut = new Lexer("let");
+    const token = sut.nextToken();
 
     expect(token.type).toBe(TokenType.Let);
     expect(token.value).toBe("let");
 });
 
-// test("should tokenize const keyword", () => {
-//     const lexer = new Lexer("const");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Const);
-//     expect(token.value).toBe("const");
-// });
+test("Tokenizing const keyword", () => {
+    const sut = new Lexer("const");
+    const token = sut.nextToken();
 
-// test("should tokenize function keyword", () => {
-//     const lexer = new Lexer("function");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Function);
-//     expect(token.value).toBe("function");
-// });
+    expect(token.type).toBe(TokenType.Const);
+    expect(token.value).toBe("const");
+});
 
-// test("should tokenize return keyword", () => {
-//     const lexer = new Lexer("return");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Return);
-//     expect(token.value).toBe("return");
-// });
+test("Tokenizing function keyword", () => {
+    const sut = new Lexer("function");
+    const token = sut.nextToken();
 
-// test("should tokenize if keyword", () => {
-//     const lexer = new Lexer("if");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.If);
-//     expect(token.value).toBe("if");
-// });
+    expect(token.type).toBe(TokenType.Function);
+    expect(token.value).toBe("function");
+});
 
-// test("should tokenize else keyword", () => {
-//     const lexer = new Lexer("else");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Else);
-//     expect(token.value).toBe("else");
-// });
+test("Tokenizing return keyword", () => {
+    const sut = new Lexer("return");
+    const token = sut.nextToken();
 
-// test("should tokenize for keyword", () => {
-//     const lexer = new Lexer("for");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.For);
-//     expect(token.value).toBe("for");
-// });
+    expect(token.type).toBe(TokenType.Return);
+    expect(token.value).toBe("return");
+});
 
-// test("should tokenize while keyword", () => {
-//     const lexer = new Lexer("while");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.While);
-//     expect(token.value).toBe("while");
-// });
+test("Tokenizing if keyword", () => {
+    const sut = new Lexer("if");
+    const token = sut.nextToken();
 
-// test("should tokenize plus operator", () => {
-//     const lexer = new Lexer("+");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Plus);
-//     expect(token.value).toBe("+");
-// });
+    expect(token.type).toBe(TokenType.If);
+    expect(token.value).toBe("if");
+});
 
-// test("should tokenize minus operator", () => {
-//     const lexer = new Lexer("-");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Minus);
-//     expect(token.value).toBe("-");
-// });
+test("Tokenizing else keyword", () => {
+    const sut = new Lexer("else");
+    const token = sut.nextToken();
 
-// test("should tokenize multiply operator", () => {
-//     const lexer = new Lexer("*");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Multiply);
-//     expect(token.value).toBe("*");
-// });
+    expect(token.type).toBe(TokenType.Else);
+    expect(token.value).toBe("else");
+});
 
-// test("should tokenize divide operator", () => {
-//     const lexer = new Lexer("/");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Divide);
-//     expect(token.value).toBe("/");
-// });
+test("Tokenizing for keyword", () => {
+    const sut = new Lexer("for");
+    const token = sut.nextToken();
 
-// test("should tokenize assignment operator", () => {
-//     const lexer = new Lexer("=");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Assign);
-//     expect(token.value).toBe("=");
-// });
+    expect(token.type).toBe(TokenType.For);
+    expect(token.value).toBe("for");
+});
 
-// test("should tokenize equality operator", () => {
-//     const lexer = new Lexer("==");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.Equals);
-//     expect(token.value).toBe("==");
-// });
+test("Tokenizing while keyword", () => {
+    const sut = new Lexer("while");
+    const token = sut.nextToken();
 
-// test("should tokenize not equals operator", () => {
-//     const lexer = new Lexer("!=");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.NotEquals);
-//     expect(token.value).toBe("!=");
-// });
+    expect(token.type).toBe(TokenType.While);
+    expect(token.value).toBe("while");
+});
 
-// test("should tokenize less than operator", () => {
-//     const lexer = new Lexer("<");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.LessThan);
-//     expect(token.value).toBe("<");
-// });
+test("Tokenizing the plus operator", () => {
+    const sut = new Lexer("+");
+    const token = sut.nextToken();
 
-// test("should tokenize greater than operator", () => {
-//     const lexer = new Lexer(">");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.GreaterThan);
-//     expect(token.value).toBe(">");
-// });
+    expect(token.type).toBe(TokenType.Plus);
+    expect(token.value).toBe("+");
+});
 
-// test("should tokenize less than or equals operator", () => {
-//     const lexer = new Lexer("<=");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.LessThanOrEquals);
-//     expect(token.value).toBe("<=");
-// });
+test("Tokenizing the minus operator", () => {
+    const sut = new Lexer("-");
+    const token = sut.nextToken();
 
-// test("should tokenize greater than or equals operator", () => {
-//     const lexer = new Lexer(">=");
-//     const token = lexer.nextToken();
-//
-//     expect(token.type).toBe(TokenType.GreaterThanOrEqual);
-//     expect(token.value).toBe(">=");
-// });
+    expect(token.type).toBe(TokenType.Minus);
+    expect(token.value).toBe("-");
+});
+
+test("Tokenizing the multiplication operator", () => {
+    const sut = new Lexer("*");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.Multiply);
+    expect(token.value).toBe("*");
+});
+
+test("Tokenizing the division operator", () => {
+    const sut = new Lexer("/");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.Divide);
+    expect(token.value).toBe("/");
+});
+
+test("Tokenizing the assignment operator", () => {
+    const sut = new Lexer("=");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.Assign);
+    expect(token.value).toBe("=");
+});
+
+test("Tokenizing the equality operator", () => {
+    const sut = new Lexer("==");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.Equals);
+    expect(token.value).toBe("==");
+});
+
+test("Tokenizing the not-equals operator", () => {
+    const sut = new Lexer("!=");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.NotEquals);
+    expect(token.value).toBe("!=");
+});
+
+test("Tokenizing the less-than operator", () => {
+    const sut = new Lexer("<");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.LessThan);
+    expect(token.value).toBe("<");
+});
+
+test("Tokenize the greater-than operator", () => {
+    const sut = new Lexer(">");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.GreaterThan);
+    expect(token.value).toBe(">");
+});
+
+test("Tokenize the less-than-or-equals operator", () => {
+    const sut = new Lexer("<=");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.LessThanOrEquals);
+    expect(token.value).toBe("<=");
+});
+
+test("Tokenize the greater-than-or-equals operator", () => {
+    const sut = new Lexer(">=");
+    const token = sut.nextToken();
+
+    expect(token.type).toBe(TokenType.GreaterThanOrEqual);
+    expect(token.value).toBe(">=");
+});
 
 // test("should tokenize open parenthesis", () => {
 //     const lexer = new Lexer("(");
