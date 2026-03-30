@@ -113,11 +113,12 @@ export class Parser {
                 this.currentPosition++;
                 return {type: "Identifier", name: token.value};
 
-            case TokenType.OpenParenthesis:
+            case TokenType.OpenParenthesis: {
                 this.currentPosition++;
                 const expression = this.parseExpression();
                 this.eat(TokenType.CloseParenthesis);
                 return expression;
+            }
 
             default:
                 throw new Error(`unexpected token: ${token.type} at line ${token.line}, column ${token.column}`);
