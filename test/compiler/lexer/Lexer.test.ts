@@ -360,7 +360,7 @@ test("should tokenize variable declaration", () => {
     sut.setSourceCode("let x = 42;");
     const tokens = sut.tokenize();
 
-    expect(tokens).toHaveLength(5);
+    expect(tokens).toHaveLength(6);
 
     expect(tokens[0]!.type).toBe(TokenType.Let);
 
@@ -379,7 +379,7 @@ test("should tokenize function declaration", () => {
     sut.setSourceCode("function add(a, b) { return a + b; }");
     const tokens = sut.tokenize();
 
-    expect(tokens).toHaveLength(14);
+    expect(tokens).toHaveLength(15);
 
     expect(tokens[0]!.type).toBe(TokenType.Function);
 
@@ -419,7 +419,7 @@ test("should tokenize if statement", () => {
     sut.setSourceCode("if (x == 5) { return true; }");
     const tokens = sut.tokenize();
 
-    expect(tokens).toHaveLength(11);
+    expect(tokens).toHaveLength(12);
 
     expect(tokens[0]!.type).toBe(TokenType.If);
 
@@ -469,19 +469,19 @@ test("should throw error for unexpected character in expression", () => {
     expect(() => sut.nextToken()).toThrow("Unexpected character: @ at line 1, column 7");
 });
 
-test("should tokenize entire input and return all tokens except EOF", () => {
+test("should tokenize entire input and return EOF as the last token", () => {
     sut.setSourceCode("let x = 42;");
     const tokens = sut.tokenize();
 
-    expect(tokens).toHaveLength(5);
-    expect(tokens[tokens.length - 1]!.type).toBe(TokenType.Semicolon);
+    expect(tokens).toHaveLength(6);
+    expect(tokens[tokens.length - 1]!.type).toBe(TokenType.EOF);
 });
 
-test("should return empty array for empty input", () => {
+test("An empty input only has an EOF token inside it", () => {
     sut.setSourceCode("");
     const tokens = sut.tokenize();
 
-    expect(tokens).toHaveLength(0);
+    expect(tokens).toHaveLength(1);
 });
 
 test("should handle multiple lines correctly", () => {
@@ -489,7 +489,7 @@ test("should handle multiple lines correctly", () => {
     sut.setSourceCode("let x = 5;\nconst y = 10;");
     const tokens = sut.tokenize();
 
-    expect(tokens).toHaveLength(10);
+    expect(tokens).toHaveLength(11);
 
     expect(tokens[0]!.line).toBe(1);
     expect(tokens[0]!.type).toBe(TokenType.Let);

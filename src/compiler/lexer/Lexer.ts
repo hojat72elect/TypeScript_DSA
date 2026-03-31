@@ -279,6 +279,8 @@ export class Lexer {
             tokens.push(token);
             token = this.nextToken();
         }
+        // we came out of the loop, and now should push the EOF token
+        tokens.push({type: TokenType.EOF, value: "", line: this.currentLine, column: this.currentColumn});
 
         return tokens;
     }
