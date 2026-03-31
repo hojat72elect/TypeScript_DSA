@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {Lexer} from "./compiler/lexer/Lexer.ts";
+import {Parser} from "./compiler/parser/Parser.ts";
 
 export function App() {
     const [text, setText] = useState("");
@@ -92,7 +93,12 @@ export function App() {
                 onMouseEnter={() => setParseHovered(true)}
                 onMouseLeave={() => setParseHovered(false)}
                 onClick={() => {
-                    console.log(`The user wants to parse : \n${text}`);
+                    const lexer = new Lexer(text);
+                    const tokens = lexer.tokenize();
+                    const parser = new Parser(tokens);
+                    const program = parser.parse();
+                    console.log(program.toString());
+
                 }}
             >
                 Parse
