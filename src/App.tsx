@@ -16,9 +16,8 @@ export function App() {
         <>
             <section className="input-section">
 
-                <input
+                <textarea
                     id="user-input"
-                    type="text"
                     value={text}
                     onChange={onTextChanged}
                     placeholder="Type something..."
