@@ -36,6 +36,7 @@ export enum TokenType {
     CloseCurlyBrace = "CloseCurlyBrace", // }
     Semicolon = "Semicolon", // ;
     Comma = "Comma", // ,
+    Dot = "Dot", // .
 
     // End of file
     EOF = "EOF"

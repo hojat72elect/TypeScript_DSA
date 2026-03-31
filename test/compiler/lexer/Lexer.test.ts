@@ -534,3 +534,12 @@ test("should handle multiple lines correctly", () => {
     expect(tokens[9]!.line).toBe(2);
     expect(tokens[9]!.column).toBe(13);
 });
+
+test("Should be able to tokenize the dot operator", () => {
+    sut.setSourceCode('console.log("hello world");');
+    const tokens = sut.tokenize();
+
+    expect(tokens).toHaveLength(8);
+    expect(tokens[1]!.type).toBe(TokenType.Dot);
+    expect(tokens[1]!.value).toBe(".");
+});

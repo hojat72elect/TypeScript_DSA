@@ -262,6 +262,8 @@ export class Lexer {
                 return {type: TokenType.Semicolon, value: ';', line: this.currentLine, column: startColumn};
             case ',':
                 return {type: TokenType.Comma, value: ',', line: this.currentLine, column: startColumn};
+            case '.':
+                return {type: TokenType.Dot, value: '.', line: this.currentLine, column: startColumn};
 
             default:
                 throw new Error(`Unexpected character: ${character} at line ${this.currentLine}, column ${startColumn}`);
